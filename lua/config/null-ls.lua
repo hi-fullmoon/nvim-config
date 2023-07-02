@@ -39,5 +39,6 @@ null_ls.setup({
       filetypes = {},
       extra_args = { '--single-quote', '--print-width=120' }
     }),
+    require("typescript.extensions.null-ls.code-actions"),
   },
 })
