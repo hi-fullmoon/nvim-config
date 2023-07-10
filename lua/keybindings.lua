@@ -21,3 +21,7 @@ keymap('v', '>', '>gv', opts)
 
 keymap('i', '<C-s>', '<esc>:w<cr>', opts)
 keymap('n', '<C-s>', ':w<cr>', opts)
+
+keymap('n', 'W', ':w<CR>', opts)
+keymap('n', 'Q', ':q<CR>', opts)
+

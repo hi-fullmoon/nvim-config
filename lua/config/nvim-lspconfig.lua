@@ -59,45 +59,66 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local servers = { 'tsserver', 'html', 'cssls', 'lua_ls', 'vimls', 'gopls', 'volar', 'eslint', 'stylelint_lsp' }
+lspconfig.tsserver.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
 
-for _, lsp in pairs(servers) do
-  local o = {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
+lspconfig.html.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
 
-  if lsp == 'lua_ls' then
-    o = vim.tbl_deep_extend('force', {
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { 'vim' },
-          },
-          workspace = {
-            library = {
-              [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-            },
-          },
+lspconfig.cssls.setup( {
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig.lua_ls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' },
+      },
+      workspace = {
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
         },
       },
-    }, o)
-  end
+    },
+  },
+})
 
-  if lsp == 'stylelint_lsp' then
-    o = vim.tbl_deep_extend('force', {
-      filetypes = { 'css', 'less', 'scss' },
-      settings = {
-        stylelintplus  = {
-          -- autoFixOnFormat = true,
-          autoFixOnSave = true,
-        }
-      },
-    }, o)
-  end
+lspconfig.vimls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
 
-  lspconfig[lsp].setup(o)
-end
+lspconfig.gopls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig.volar.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig.eslint.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+lspconfig.stylelint_lsp.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { 'css', 'less', 'scss' },
+  settings = {
+    stylelintplus  = {
+      -- autoFixOnFormat = true,
+      autoFixOnSave = true,
+    }
+  },
+})

@@ -27,11 +27,8 @@ return packer.startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
   use 'nvim-treesitter/nvim-treesitter'
   use 'nvim-treesitter/nvim-treesitter-textobjects'
-
   use 'glepnir/lspsaga.nvim'
-
   use 'mhartington/oceanic-next'
-  use 'Mofiqul/dracula.nvim'
   use 'RRethy/vim-illuminate'
 
   use { 'williamboman/mason.nvim', run = ':MasonUpdate' }

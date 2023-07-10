@@ -1,7 +1,14 @@
 local status_ok, nvim_tree = pcall(require, 'nvim-tree')
 if not status_ok then
+  vim.notify('没有找到 nvim-tree')
   return
 end
+
+local keymap = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+keymap('n', 'tt', ':NvimTreeToggle<CR>', opts)
+keymap('n', '<leader>t', ':NvimTreeFocus<CR>', opts)
 
 nvim_tree.setup {
   view = {
@@ -35,4 +42,3 @@ nvim_tree.setup {
   },
 }
 
-vim.keymap.set('n', 'tt', ':NvimTreeToggle<CR>', {})

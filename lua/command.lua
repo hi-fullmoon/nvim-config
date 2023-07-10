@@ -1,6 +1,5 @@
 -- 设置主题
 vim.cmd [[colorscheme OceanicNext]]
--- vim.cmd [[colorscheme dracula-soft]]
 
 -- 背景透明
 vim.cmd [[
@@ -25,5 +24,3 @@ vim.cmd [[
 -- 中文输入法切换问题
 vim.cmd [[autocmd InsertLeave * :silent !/usr/local/bin/macism com.apple.keylayout.ABC]]
 
--- 自定义命令
-vim.api.nvim_create_user_command('StyleFix', 'silent !stylelint % --fix', { desc = 'Stylelint fix' })
