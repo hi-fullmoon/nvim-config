@@ -1,6 +1,5 @@
 local status_ok, nvim_tree = pcall(require, 'nvim-tree')
 if not status_ok then
-  vim.notify('没有找到 nvim-tree')
   return
 end
 
@@ -12,7 +11,7 @@ keymap('n', '<leader>t', ':NvimTreeFocus<CR>', opts)
 
 nvim_tree.setup {
   view = {
-    width = 38,
+    width = 40,
     side = 'left',
   },
   renderer = {

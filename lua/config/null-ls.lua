@@ -37,8 +37,9 @@ null_ls.setup({
   sources = {
     formatting.prettier.with({
       filetypes = {},
-      extra_args = { '--single-quote', '--print-width=120' }
+      -- extra_args = { '--single-quote', '--print-width=120' }
+      extra_args = { '--single-quote' }
     }),
-    require("typescript.extensions.null-ls.code-actions"),
+    -- require("typescript.extensions.null-ls.code-actions"),
   },
 })

@@ -35,8 +35,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local opts = { buffer = ev.buf }
 
     vim.keymap.set('n', 'K', ':Lspsaga hover_doc<CR>')
-    vim.keymap.set('n', 'gd', ':Telescope lsp_definitions theme=dropdown<CR>', opts)
-    -- vim.keymap.set('n', 'gd', ':Lspsaga goto_definition<CR>', opts)
+    -- vim.keymap.set('n', 'gd', ':Telescope lsp_definitions theme=dropdown<CR>', opts)
+    vim.keymap.set('n', 'gd', ':Lspsaga goto_definition<CR>', opts)
     vim.keymap.set('n', 'gt', ':Lspsaga goto_type_definition<CR>', opts)
     vim.keymap.set('n', 'gh', ':Lspsaga finder<CR>')
     vim.keymap.set('n', '<leader>e', ':Lspsaga show_line_diagnostics<CR>', opts)
