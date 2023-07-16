@@ -5,6 +5,7 @@ let g:loaded_illuminate = 0
 set clipboard=unnamedplus
 
 lua require('config.comment')
+lua require('config.leap')
 
 autocmd InsertLeave * :silent !/usr/local/bin/macism com.apple.keylayout.ABC
 

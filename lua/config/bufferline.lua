@@ -32,4 +32,4 @@ vim.api.nvim_set_keymap('n', '<leader>5', ':BufferLineGoToBuffer 5<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>6', ':BufferLineGoToBuffer 6<CR>', opts)
 
 vim.api.nvim_set_keymap('n', '<leader>cl', ':BufferLineCloseLeft<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>CR', ':BufferLineCloseRight<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>cr', ':BufferLineCloseRight<CR>', opts)
