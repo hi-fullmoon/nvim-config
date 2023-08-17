@@ -27,7 +27,7 @@ return packer.startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
   use 'nvim-treesitter/nvim-treesitter'
   use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use 'glepnir/lspsaga.nvim'
+  use 'nvimdev/lspsaga.nvim'
   use 'mhartington/oceanic-next'
   use 'RRethy/vim-illuminate'
 

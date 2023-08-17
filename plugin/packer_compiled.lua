@@ -167,7 +167,7 @@ _G.packer_plugins = {
   ["lspsaga.nvim"] = {
     loaded = true,
     path = "/Users/zhengbiwen/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
-    url = "git@github.com:glepnir/lspsaga.nvim"
+    url = "git@github.com:nvimdev/lspsaga.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
