@@ -149,6 +149,11 @@ _G.packer_plugins = {
     path = "/Users/zhengbiwen/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim",
     url = "git@github.com:akinsho/flutter-tools.nvim"
   },
+  ["formatter.nvim"] = {
+    loaded = true,
+    path = "/Users/zhengbiwen/.local/share/nvim/site/pack/packer/start/formatter.nvim",
+    url = "git@github.com:mhartington/formatter.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/zhengbiwen/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -191,11 +196,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/zhengbiwen/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "git@github.com:williamboman/mason.nvim"
-  },
-  ["null-ls.nvim"] = {
-    loaded = true,
-    path = "/Users/zhengbiwen/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "git@github.com:jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,

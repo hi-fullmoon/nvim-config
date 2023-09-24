@@ -31,10 +31,9 @@ return packer.startup(function(use)
   use 'mhartington/oceanic-next'
   use 'RRethy/vim-illuminate'
 
-  use { 'williamboman/mason.nvim', run = ':MasonUpdate' }
+  use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
   use 'neovim/nvim-lspconfig'
-  use 'jose-elias-alvarez/null-ls.nvim'
   use 'jose-elias-alvarez/typescript.nvim'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/nvim-cmp'
@@ -47,6 +46,7 @@ return packer.startup(function(use)
   use 'saadparwaiz1/cmp_luasnip'
   use 'rafamadriz/friendly-snippets'
   use { 'j-hui/fidget.nvim', tag = 'legacy' }
+  use 'mhartington/formatter.nvim'
 
   use 'kyazdani42/nvim-tree.lua'
   use 'nvim-lualine/lualine.nvim'

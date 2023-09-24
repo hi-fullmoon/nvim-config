@@ -24,3 +24,11 @@ vim.cmd [[
 -- 中文输入法切换问题
 vim.cmd [[autocmd InsertLeave * :silent !/usr/local/bin/macism com.apple.keylayout.ABC]]
 
+
+-- 保存时自动格式化
+vim.cmd [[
+  augroup FormatAutogroup
+    autocmd!
+    autocmd BufWritePost * FormatWrite
+  augroup END
+]]
