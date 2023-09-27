@@ -69,6 +69,10 @@ formatter.setup {
       require('formatter.filetypes.lua').stylua,
     },
 
+    yaml = {
+      require('formatter.filetypes.yaml').prettier,
+    },
+
     less = {
       localFormatter,
     },
