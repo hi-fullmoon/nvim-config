@@ -65,10 +65,6 @@ formatter.setup {
       require('formatter.filetypes.typescriptreact').prettier,
     },
 
-    lua = {
-      require('formatter.filetypes.lua').stylua,
-    },
-
     yaml = {
       require('formatter.filetypes.yaml').prettier,
     },
@@ -80,7 +76,6 @@ formatter.setup {
     scss = {
       localFormatter,
     },
-
 
     -- any filetype
     ['*'] = {
