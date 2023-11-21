@@ -27,7 +27,6 @@ return packer.startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
   use 'nvim-treesitter/nvim-treesitter'
   use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use 'nvimdev/lspsaga.nvim'
   use 'mhartington/oceanic-next'
   use 'RRethy/vim-illuminate'
 
@@ -47,6 +46,7 @@ return packer.startup(function(use)
   use 'rafamadriz/friendly-snippets'
   use { 'j-hui/fidget.nvim', tag = 'legacy' }
   use 'mhartington/formatter.nvim'
+  use 'nvimdev/lspsaga.nvim'
 
   use 'kyazdani42/nvim-tree.lua'
   use 'nvim-lualine/lualine.nvim'

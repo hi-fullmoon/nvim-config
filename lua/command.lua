@@ -25,9 +25,9 @@ vim.cmd [[
 vim.cmd [[autocmd InsertLeave * :silent !/usr/local/bin/macism com.apple.keylayout.ABC]]
 
 -- 保存时自动格式化
-vim.cmd [[
-  augroup FormatAutogroup
-    autocmd!
-    autocmd BufWritePost * silent! FormatWrite
-  augroup end
-]]
+-- vim.cmd [[
+--   augroup FormatAutogroup
+--     autocmd!
+--     autocmd BufWritePost * silent! FormatWrite
+--   augroup end
+-- ]]

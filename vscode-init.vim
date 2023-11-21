@@ -3,7 +3,7 @@ let mapleader = ' '
 let g:loaded_illuminate = 0
 let g:matchup_enabled = 0
 
-set clipboard=unnamedplus
+set clipboard^=unnamed,unnamedplus
 
 lua require('config.comment')
 lua require('config.leap')
