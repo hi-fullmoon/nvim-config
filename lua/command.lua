@@ -30,6 +30,7 @@ vim.cmd [[
 augroup('__formatter__', {
   clear = true,
 })
+
 autocmd('BufWritePost', {
 	group = '__formatter__',
 	command = ':FormatWrite',

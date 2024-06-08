@@ -11,9 +11,6 @@ return {
         -- 'html', 'css', 'vim', 'vue', 'lua', 'javascript', 'typescript',
         -- 'tsx', 'c', 'rust', 'go', 'json', 'dart', 'markdown', 'markdown_inline'
       },
-      autotag = {
-        enable = true,
-      },
       matchup = {
         enable = true,
       },

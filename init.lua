@@ -19,7 +19,7 @@ require('keybindings')
 require('lazy').setup('plugins')
 
 if vim.g.vscode then
-  require('vscode')
+  require('vscode-neovim')
 else
   require('command')
 end

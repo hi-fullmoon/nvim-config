@@ -1,6 +1,7 @@
-local vscode = require('vscode-neovim')
+local vscode = require('vscode')
 
-vim.keymap.set('n', 'W', function() vscode.call('workbench.action.files.save') end)
+vim.keymap.set('n', 'K', function() vscode.action('editor.action.showHover') end)
+vim.keymap.set('n', 'W', function() vscode.action('workbench.action.files.save') end)
 vim.keymap.set('n', 'Q', function() vscode.call('workbench.action.closeActiveEditor') end)
 vim.keymap.set('n', 'tt', function() vscode.call('workbench.explorer.fileView.focus') end)
 
@@ -26,3 +27,11 @@ vim.keymap.set('n', ']c', function() vscode.call('editor.action.dirtydiff.next')
 vim.cmd [[
   autocmd InsertLeave * :silent !/usr/local/bin/macism com.apple.keylayout.ABC
 ]]
+
+vim.cmd [[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+  augroup end
+]]
+

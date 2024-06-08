@@ -1,12 +1,21 @@
 return {
   'akinsho/bufferline.nvim',
   cond = not vim.g.vscode,
+  priority = 49,
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+  },
   config = function ()
-    require('bufferline').setup({
+    local bufferline = require('bufferline');
+    bufferline.setup({
       options = {
         mode = 'buffers',
         numbers = 'none',
         separator_style = 'thin',
+        style_preset = {
+          bufferline.style_preset.no_italic,
+          bufferline.style_preset.no_bold
+        },
         offsets = {
           {
             filetype = 'NvimTree',
@@ -14,7 +23,7 @@ return {
             highlight = 'Directory'
           }
         },
-        diagnostics = 'nvim_lsp',
+        diagnostics = "coc",
         diagnostics_update_in_insert = false,
         show_close_icon = false,
         sort_by = 'insert_after_current'

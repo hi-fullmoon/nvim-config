@@ -15,7 +15,7 @@ return {
             util.escape_path(util.get_current_buffer_file_path()),
           },
           stdin = true,
-          try_node_modules = true,
+          try_node_modules = false,
         }
       end
 
@@ -84,7 +84,7 @@ return {
 
         -- any filetype
         ['*'] = {
-          require('formatter.filetypes.any').remove_trailing_whitespace
+          -- require('formatter.filetypes.any').remove_trailing_whitespace
         }
       }
     }
