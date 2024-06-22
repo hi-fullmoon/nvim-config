@@ -29,6 +29,7 @@ vim.keymap.set('n', '<leader>3', function() vscode.call('workbench.action.openEd
 vim.keymap.set('n', '<leader>4', function() vscode.call('workbench.action.openEditorAtIndex4') end)
 vim.keymap.set('n', '<leader>5', function() vscode.call('workbench.action.openEditorAtIndex5') end)
 vim.keymap.set('n', '<leader>6', function() vscode.call('workbench.action.openEditorAtIndex6') end)
+vim.keymap.set('n', '<leader>co', function() vscode.call('workbench.action.closeOtherEditors') end)
 
 vim.keymap.set('n', '<leader>rn', function() vscode.call('editor.action.rename') end)
 vim.keymap.set('n', '<leader>ca', function() vscode.call('editor.action.quickFix') end)
