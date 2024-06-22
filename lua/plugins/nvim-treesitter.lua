@@ -7,12 +7,9 @@ return {
   config = function ()
     require('nvim-treesitter.configs').setup({
       auto_install = false,
-      ensure_installed = {
-        -- 'html', 'css', 'vim', 'vue', 'lua', 'javascript', 'typescript',
-        -- 'tsx', 'c', 'rust', 'go', 'json', 'dart', 'markdown', 'markdown_inline'
-      },
+      ensure_installed = {},
       matchup = {
-        enable = true,
+       nenable = true,
       },
       highlight = {
         enable = true,
@@ -25,21 +22,16 @@ return {
         end,
         additional_vim_regex_highlighting = false
       },
-      indent = {
+      -- indent = {
+      --   enable = true,
+      -- },
+      incremental_selection = {
         enable = true,
-      },
-      textobjects = {
-        select = {
-          enable = true,
-          -- Automatically jump forward to textobj, similar to targets.vim
-          lookahead = true,
-          keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
-            ['af'] = '@function.outer',
-            ['if'] = '@function.inner',
-            ['ac'] = '@class.outer',
-            ['ic'] = '@class.inner',
-          },
+        keymaps = {
+          init_selection = 'gnn',
+          node_incremental = 'grn',
+          scope_incremental = 'grc',
+          node_decremental = 'grm',
         },
       },
     })

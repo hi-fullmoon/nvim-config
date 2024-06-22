@@ -1,5 +1,23 @@
-local vscode = require('vscode')
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable',
+    lazypath,
+  })
+end
+
+vim.opt.rtp:prepend(lazypath)
+
+require('lazy').setup('plugins')
+
+vim.g.mapleader = ' '
+
+local vscode = require('vscode')
 vim.keymap.set('n', 'K', function() vscode.action('editor.action.showHover') end)
 vim.keymap.set('n', 'W', function() vscode.action('workbench.action.files.save') end)
 vim.keymap.set('n', 'Q', function() vscode.call('workbench.action.closeActiveEditor') end)
@@ -24,6 +42,7 @@ vim.keymap.set('n', '<leader>]', function() vscode.call('editor.action.marker.ne
 vim.keymap.set('n', '[c', function() vscode.call('editor.action.dirtydiff.previous') end)
 vim.keymap.set('n', ']c', function() vscode.call('editor.action.dirtydiff.next') end)
 
+
 vim.cmd [[
   autocmd InsertLeave * :silent !/usr/local/bin/macism com.apple.keylayout.ABC
 ]]
@@ -34,4 +53,7 @@ vim.cmd [[
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
 ]]
+
+
+
 
