@@ -16,8 +16,10 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup('plugins')
 
 vim.g.mapleader = ' '
+vim.o.clipboard = 'unnamedplus'
 
 local vscode = require('vscode')
+
 vim.keymap.set('n', 'K', function() vscode.action('editor.action.showHover') end)
 vim.keymap.set('n', 'W', function() vscode.action('workbench.action.files.save') end)
 vim.keymap.set('n', 'Q', function() vscode.call('workbench.action.closeActiveEditor') end)
