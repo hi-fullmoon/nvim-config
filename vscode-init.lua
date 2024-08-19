@@ -1,5 +1,4 @@
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
     'git',
@@ -10,14 +9,28 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     lazypath,
   })
 end
-
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup('plugins')
-
+-- 基础配置
+------------------------------------------------------------------------------------------
 vim.g.mapleader = ' '
 vim.o.clipboard = 'unnamedplus'
 
+-- 一些命令
+------------------------------------------------------------------------------------------
+vim.cmd [[
+  autocmd InsertLeave * :silent !/opt/homebrew/bin/macism com.apple.keylayout.ABC
+]]
+
+vim.cmd [[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+  augroup end
+]]
+
+-- vscode 按键映射
+------------------------------------------------------------------------------------------
 local vscode = require('vscode')
 
 vim.keymap.set('n', 'K', function() vscode.action('editor.action.showHover') end)
@@ -40,23 +53,12 @@ vim.keymap.set('n', '<leader>q', function() vscode.call('workbench.action.closeA
 vim.keymap.set('n', '<leader>ff', function() vscode.call('workbench.action.quickOpen') end)
 vim.keymap.set('n', '<leader>fg', function() vscode.call('workbench.action.findInFiles') end)
 vim.keymap.set('n', '<leader>sp', function() vscode.call('workbench.action.replaceInFiles') end)
+vim.keymap.set('n', '<leader>fr', function() vscode.call('workbench.action.openRecent') end)
 vim.keymap.set('n', '<leader>[', function() vscode.call('editor.action.marker.prev') end)
 vim.keymap.set('n', '<leader>]', function() vscode.call('editor.action.marker.next') end)
 vim.keymap.set('n', '[c', function() vscode.call('editor.action.dirtydiff.previous') end)
 vim.keymap.set('n', ']c', function() vscode.call('editor.action.dirtydiff.next') end)
 
-
-vim.cmd [[
-  autocmd InsertLeave * :silent !/usr/local/bin/macism com.apple.keylayout.ABC
-]]
-
-vim.cmd [[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-  augroup end
-]]
-
-
-
-
+-- 加载 neovim 插件
+------------------------------------------------------------------------------------------
+require('lazy').setup('plugins')
