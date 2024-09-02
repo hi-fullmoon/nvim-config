@@ -19,7 +19,7 @@ vim.o.clipboard = 'unnamedplus'
 -- 一些命令
 ------------------------------------------------------------------------------------------
 vim.cmd [[
-  autocmd InsertLeave * :silent !/opt/homebrew/bin/macism com.apple.keylayout.ABC
+  autocmd InsertLeave * :silent !/usr/local/bin/macism com.apple.keylayout.ABC
 ]]
 
 vim.cmd [[
@@ -37,6 +37,8 @@ vim.keymap.set('n', 'K', function() vscode.action('editor.action.showHover') end
 vim.keymap.set('n', 'W', function() vscode.action('workbench.action.files.save') end)
 vim.keymap.set('n', 'Q', function() vscode.call('workbench.action.closeActiveEditor') end)
 vim.keymap.set('n', 'tt', function() vscode.call('workbench.explorer.fileView.focus') end)
+
+vim.keymap.set('n', '<leader>be', function() vscode.call('workbench.action.showAllEditors') end)
 
 vim.keymap.set('n', '<leader>1', function() vscode.call('workbench.action.openEditorAtIndex1') end)
 vim.keymap.set('n', '<leader>2', function() vscode.call('workbench.action.openEditorAtIndex2') end)
