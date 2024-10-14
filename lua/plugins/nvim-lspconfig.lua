@@ -16,9 +16,9 @@ return {
 
     local signs = {
       { name = 'DiagnosticSignError', text = '' },
-      { name = 'DiagnosticSignWarn',  text = '' },
-      { name = 'DiagnosticSignHint',  text = '' },
-      { name = 'DiagnosticSignInfo',  text = '' },
+      { name = 'DiagnosticSignWarn', text = '' },
+      { name = 'DiagnosticSignHint', text = '' },
+      { name = 'DiagnosticSignInfo', text = '' },
     }
 
     for _, sign in ipairs(signs) do
@@ -74,7 +74,7 @@ return {
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     local home = os.getenv('HOME')
 
-    lspconfig.tsserver.setup({
+    lspconfig.ts_ls.setup({
       on_attach = on_attach,
       capabilities = capabilities,
       filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
@@ -102,7 +102,7 @@ return {
       capabilities = capabilities,
     })
 
-    lspconfig.cssls.setup( {
+    lspconfig.cssls.setup({
       on_attach = on_attach,
       capabilities = capabilities,
     })
@@ -134,6 +134,11 @@ return {
       capabilities = capabilities,
     })
 
+    lspconfig.bashls.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+    })
+
     lspconfig.gopls.setup({
       on_attach = on_attach,
       capabilities = capabilities,
@@ -152,7 +157,7 @@ return {
       capabilities = capabilities,
       filetypes = { 'css', 'less', 'scss' },
       settings = {
-        stylelintplus  = {
+        stylelintplus = {
           -- autoFixOnFormat = true,
           autoFixOnSave = true,
         }
