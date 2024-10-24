@@ -6,6 +6,7 @@ return {
   },
   config = function()
     require('nvim-treesitter.configs').setup({
+      disabled = { 'yaml' },
       auto_install = false,
       ensure_installed = {},
       matchup = {
