@@ -16,7 +16,7 @@ return {
       -- filetypes_denylist: filetypes to not illuminate, this overrides filetypes_allowlist
       filetypes_denylist = {},
       -- filetypes_allowlist: filetypes to illuminate, this is overriden by filetypes_denylist
-      filetypes_allowlist = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'rust', 'dart' },
+      filetypes_allowlist = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
       -- modes_denylist: modes to not illuminate, this overrides modes_allowlist
       -- See `:help mode()` for possible values
       modes_denylist = { 'i' },
@@ -43,6 +43,5 @@ return {
       -- min_count_to_highlight: minimum number of matches required to perform highlighting
       min_count_to_highlight = 1,
     })
-
   end
 }

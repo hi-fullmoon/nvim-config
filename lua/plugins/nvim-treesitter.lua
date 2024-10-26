@@ -4,12 +4,13 @@ return {
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects'
   },
-  config = function ()
+  config = function()
     require('nvim-treesitter.configs').setup({
+      disabled = { 'yaml' },
       auto_install = false,
       ensure_installed = {},
       matchup = {
-       nenable = true,
+        nenable = true,
       },
       highlight = {
         enable = true,
