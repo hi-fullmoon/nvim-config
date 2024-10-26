@@ -16,9 +16,9 @@ return {
 
     local signs = {
       { name = 'DiagnosticSignError', text = '' },
-      { name = 'DiagnosticSignWarn',  text = '' },
-      { name = 'DiagnosticSignHint',  text = '' },
-      { name = 'DiagnosticSignInfo',  text = '' },
+      { name = 'DiagnosticSignWarn', text = '' },
+      { name = 'DiagnosticSignHint', text = '' },
+      { name = 'DiagnosticSignInfo', text = '' },
     }
 
     for _, sign in ipairs(signs) do
@@ -45,13 +45,13 @@ return {
 
         -- vim.keymap.set('n', 'K', vim.lsp.buf.hover)
         vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<cr>')
+        vim.keymap.set('n', 'gh', '<cmd>Lspsaga hover_doc<cr>')
         -- vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<cr>', opts)
         vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions theme=dropdown<cr>', opts)
         -- vim.keymap.set('n', 'gd', '<cmd>Lspsaga goto_definition<cr>', opts)
-        vim.keymap.set('n', 'gt', '<cmd>Lspsaga goto_type_definition theme=dropdown<cr>', opts)
+        vim.keymap.set('n', 'gt', '<cmd>Lspsaga goto_type_definition<cr>', opts)
         -- vim.keymap.set('n', 'fr', vim.lsp.buf.references)
         vim.keymap.set('n', 'fr', '<cmd>Telescope lsp_references<cr>')
-        vim.keymap.set('n', 'gh', '<cmd>Lspsaga finder<cr>')
         vim.keymap.set('n', '<leader>e', '<cmd>Lspsaga show_line_diagnostics<cr>', opts)
         vim.keymap.set('n', '<leader>[', '<cmd>Lspsaga diagnostic_jump_prev<cr>', opts)
         vim.keymap.set('n', '<leader>]', '<cmd>Lspsaga diagnostic_jump_next<cr>', opts)
@@ -74,7 +74,7 @@ return {
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     local home = os.getenv('HOME')
 
-    lspconfig.tsserver.setup({
+    lspconfig.ts_ls.setup({
       on_attach = on_attach,
       capabilities = capabilities,
       filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
@@ -102,7 +102,7 @@ return {
       capabilities = capabilities,
     })
 
-    lspconfig.cssls.setup( {
+    lspconfig.cssls.setup({
       on_attach = on_attach,
       capabilities = capabilities,
     })
@@ -152,7 +152,7 @@ return {
       capabilities = capabilities,
       filetypes = { 'css', 'less', 'scss' },
       settings = {
-        stylelintplus  = {
+        stylelintplus = {
           -- autoFixOnFormat = true,
           autoFixOnSave = true,
         }

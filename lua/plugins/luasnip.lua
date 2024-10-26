@@ -1,6 +1,7 @@
 return {
   'L3MON4D3/LuaSnip',
   cond = not vim.g.vscode,
+  version = 'v2.*',
   config = function()
     local ls = require('luasnip')
 
