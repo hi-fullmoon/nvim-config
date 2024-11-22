@@ -23,8 +23,8 @@ if vim.fn.has('mac') == 1 then
   -- 检查是否为 Apple Silicon
   local is_apple_silicon = vim.fn.system('uname -m'):find('arm64') ~= nil
   local macism_path = is_apple_silicon
-    and '/opt/homebrew/bin/macism'  -- Apple Silicon 路径
-    or '/usr/local/bin/macism'     -- Intel Mac 路径
+      and '/opt/homebrew/bin/macism' -- Apple Silicon 路径
+      or '/usr/local/bin/macism'     -- Intel Mac 路径
 
   vim.cmd(string.format([[
     autocmd InsertLeave * :silent !%s com.apple.keylayout.ABC
@@ -46,16 +46,12 @@ vim.cmd [[
 ------------------------------------------------------------------------------------------
 local vscode = require('vscode')
 
+vim.keymap.set('n', 'tt', function() vscode.call('workbench.explorer.fileView.focus') end)
 vim.keymap.set('n', 'K', function() vscode.action('editor.action.showHover') end)
 vim.keymap.set('n', 'W', function() vscode.action('saveAll') end)
 vim.keymap.set('n', 'Q', function() vscode.call('workbench.action.closeActiveEditor') end)
-vim.keymap.set('n', 'tt', function() vscode.call('workbench.explorer.fileView.focus') end)
+vim.keymap.set('n', 'gt', function() vscode.call('editor.action.goToTypeDefinition') end)
 vim.keymap.set('n', '<leader>be', function() vscode.call('workbench.action.showAllEditors') end)
-
-vim.keymap.set('n', '<leader>be', function() vscode.call('workbench.action.showAllEditors') end)
-
-vim.keymap.set('n', '<C>+o', function() vscode.call('workbench.action.navigateBack') end)
-vim.keymap.set('n', '<C>+i', function() vscode.call('workbench.action.navigateForward') end)
 
 vim.keymap.set('n', '<leader>1', function() vscode.call('workbench.action.openEditorAtIndex1') end)
 vim.keymap.set('n', '<leader>2', function() vscode.call('workbench.action.openEditorAtIndex2') end)
@@ -78,6 +74,11 @@ vim.keymap.set('n', '<leader>[', function() vscode.call('editor.action.marker.pr
 vim.keymap.set('n', '<leader>]', function() vscode.call('editor.action.marker.next') end)
 vim.keymap.set('n', '[c', function() vscode.call('editor.action.dirtydiff.previous') end)
 vim.keymap.set('n', ']c', function() vscode.call('editor.action.dirtydiff.next') end)
+vim.keymap.set({ "n", "x", "i" }, "<C-d>", function()
+  vscode.with_insert(function()
+    vscode.action("editor.action.addSelectionToNextFindMatch")
+  end)
+end)
 
 -- 加载 neovim 插件
 ------------------------------------------------------------------------------------------
