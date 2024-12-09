@@ -46,6 +46,10 @@ vim.cmd [[
 ------------------------------------------------------------------------------------------
 local vscode = require('vscode')
 
+vim.keymap.set('n', 'j', function() vscode.call('cursorDown') end)
+vim.keymap.set('n', 'k', function() vscode.call('cursorUp') end)
+vim.keymap.set('n', 'l', function() vscode.call('cursorRight') end)
+vim.keymap.set('n', 'h', function() vscode.call('cursorLeft') end)
 vim.keymap.set('n', 'tt', function() vscode.call('workbench.explorer.fileView.focus') end)
 vim.keymap.set('n', 'K', function() vscode.action('editor.action.showHover') end)
 vim.keymap.set('n', 'W', function() vscode.action('saveAll') end)
@@ -74,11 +78,6 @@ vim.keymap.set('n', '<leader>[', function() vscode.call('editor.action.marker.pr
 vim.keymap.set('n', '<leader>]', function() vscode.call('editor.action.marker.next') end)
 vim.keymap.set('n', '[c', function() vscode.call('editor.action.dirtydiff.previous') end)
 vim.keymap.set('n', ']c', function() vscode.call('editor.action.dirtydiff.next') end)
-vim.keymap.set({ "n", "x", "i" }, "<C-d>", function()
-  vscode.with_insert(function()
-    vscode.action("editor.action.addSelectionToNextFindMatch")
-  end)
-end)
 
 -- 加载 neovim 插件
 ------------------------------------------------------------------------------------------
