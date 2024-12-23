@@ -80,7 +80,7 @@ vim.keymap.set('n', '[c', function() vscode.call('editor.action.dirtydiff.previo
 vim.keymap.set('n', ']c', function() vscode.call('editor.action.dirtydiff.next') end)
 
 vim.api.nvim_create_user_command(
-  'Re',
+  'RE',
   function(opts)
     vscode.call('workbench.action.reloadWindow')
   end,
