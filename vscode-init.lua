@@ -79,6 +79,14 @@ vim.keymap.set('n', '<leader>]', function() vscode.call('editor.action.marker.ne
 vim.keymap.set('n', '[c', function() vscode.call('editor.action.dirtydiff.previous') end)
 vim.keymap.set('n', ']c', function() vscode.call('editor.action.dirtydiff.next') end)
 
+vim.api.nvim_create_user_command(
+  'Re',
+  function(opts)
+    vscode.call('workbench.action.reloadWindow')
+  end,
+  {}
+)
+
 -- 加载 neovim 插件
 ------------------------------------------------------------------------------------------
 require('lazy').setup('plugins')
