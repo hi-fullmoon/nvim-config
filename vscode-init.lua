@@ -55,6 +55,7 @@ vim.keymap.set('n', 'K', function() vscode.action('editor.action.showHover') end
 vim.keymap.set('n', 'W', function() vscode.action('saveAll') end)
 vim.keymap.set('n', 'Q', function() vscode.call('workbench.action.closeActiveEditor') end)
 vim.keymap.set('n', 'gt', function() vscode.call('editor.action.goToTypeDefinition') end)
+vim.keymap.set('n', 'gr', function() vscode.call('editor.action.goToReferences') end)
 vim.keymap.set('n', '<leader>be', function() vscode.call('workbench.action.showAllEditors') end)
 
 vim.keymap.set('n', '<leader>1', function() vscode.call('workbench.action.openEditorAtIndex1') end)
@@ -67,8 +68,6 @@ vim.keymap.set('n', '<leader>co', function() vscode.call('workbench.action.close
 
 vim.keymap.set('n', '<leader>rn', function() vscode.call('editor.action.rename') end)
 vim.keymap.set('n', '<leader>ca', function() vscode.call('editor.action.quickFix') end)
-vim.keymap.set('n', '<leader>sa', function() vscode.call('editor.action.sourceAction') end)
-vim.keymap.set('n', '<leader>gr', function() vscode.call('editor.action.goToReferences') end)
 vim.keymap.set('n', '<leader>q', function() vscode.call('workbench.action.closeActiveEditor') end)
 vim.keymap.set('n', '<leader>ff', function() vscode.call('workbench.action.quickOpen') end)
 vim.keymap.set('n', '<leader>fg', function() vscode.call('workbench.action.findInFiles') end)
@@ -79,9 +78,13 @@ vim.keymap.set('n', '<leader>]', function() vscode.call('editor.action.marker.ne
 vim.keymap.set('n', '[c', function() vscode.call('editor.action.dirtydiff.previous') end)
 vim.keymap.set('n', ']c', function() vscode.call('editor.action.dirtydiff.next') end)
 
+vim.keymap.set({ 'n', 'x' }, '<leader>ar', function()
+  vscode.action('editor.action.refactor')
+end)
+
 vim.api.nvim_create_user_command(
   'RE',
-  function(opts)
+  function()
     vscode.call('workbench.action.reloadWindow')
   end,
   {}
