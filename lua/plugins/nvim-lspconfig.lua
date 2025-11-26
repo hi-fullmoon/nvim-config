@@ -12,8 +12,6 @@ return {
     'rafamadriz/friendly-snippets'
   },
   config = function()
-    local lspconfig = require('lspconfig')
-
     local signs = {
       { name = 'DiagnosticSignError', text = '' },
       { name = 'DiagnosticSignWarn', text = '' },
@@ -74,7 +72,7 @@ return {
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     local home = os.getenv('HOME')
 
-    lspconfig.ts_ls.setup({
+    vim.lsp.config('ts_ls', {
       on_attach = on_attach,
       capabilities = capabilities,
       filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
@@ -89,30 +87,30 @@ return {
       },
     })
 
-    lspconfig.volar.setup({
+    vim.lsp.config('vue_ls', {
       on_attach = on_attach,
       capabilities = capabilities,
       filetypes = { 'vue' }
     })
 
-    lspconfig.angularls.setup({})
+    vim.lsp.config('angularls', {})
 
-    lspconfig.html.setup({
+    vim.lsp.config('html_ls', {
       on_attach = on_attach,
       capabilities = capabilities,
     })
 
-    lspconfig.cssls.setup({
+    vim.lsp.config('cssls', {
       on_attach = on_attach,
       capabilities = capabilities,
     })
 
-    lspconfig.tailwindcss.setup({
+    vim.lsp.config('tailwindcss', {
       on_attach = on_attach,
       capabilities = capabilities,
     })
 
-    lspconfig.lua_ls.setup({
+    vim.lsp.config('lua_ls', {
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
@@ -129,22 +127,22 @@ return {
       },
     })
 
-    lspconfig.vimls.setup({
+    vim.lsp.config('vimls', {
       on_attach = on_attach,
       capabilities = capabilities,
     })
 
-    lspconfig.bashls.setup({
+    vim.lsp.config('bashls', {
       on_attach = on_attach,
       capabilities = capabilities,
     })
 
-    lspconfig.gopls.setup({
+    vim.lsp.config('gopls', {
       on_attach = on_attach,
       capabilities = capabilities,
     })
 
-    lspconfig.eslint.setup({
+    vim.lsp.config('eslint', {
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
@@ -152,7 +150,7 @@ return {
       }
     })
 
-    lspconfig.stylelint_lsp.setup({
+    vim.lsp.config('stylelint_lsp', {
       on_attach = on_attach,
       capabilities = capabilities,
       filetypes = { 'css', 'less', 'scss' },
