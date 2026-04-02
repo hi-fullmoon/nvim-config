@@ -60,8 +60,8 @@ vim.keymap.set('n', 'W', function() vscode.action('saveAll') end)
 vim.keymap.set('n', 'Q', function() vscode.call('workbench.action.closeActiveEditor') end)
 vim.keymap.set('n', 'gt', function() vscode.call('editor.action.goToTypeDefinition') end)
 vim.keymap.set('n', 'gr', function() vscode.call('editor.action.goToReferences') end)
-vim.keymap.set('n', '<leader>be', function() vscode.call('workbench.action.showAllEditors') end)
 
+vim.keymap.set('n', '<leader>be', function() vscode.call('workbench.action.showAllEditors') end)
 vim.keymap.set('n', '<leader>1', function() vscode.call('workbench.action.openEditorAtIndex1') end)
 vim.keymap.set('n', '<leader>2', function() vscode.call('workbench.action.openEditorAtIndex2') end)
 vim.keymap.set('n', '<leader>3', function() vscode.call('workbench.action.openEditorAtIndex3') end)
@@ -86,6 +86,12 @@ vim.keymap.set({ 'n', 'x' }, '<leader>ar', function()
   vscode.action('editor.action.refactor')
 end)
 
+vim.keymap.set({ "n", "x", "i" }, "<C-d>", function()
+  vscode.with_insert(function()
+    vscode.action("editor.action.addSelectionToNextFindMatch")
+  end)
+end)
+
 vim.api.nvim_create_user_command(
   'RE',
   function()
@@ -96,6 +102,14 @@ vim.api.nvim_create_user_command(
 
 vim.api.nvim_create_user_command(
   'Noh',
+  function()
+    vim.cmd('nohlsearch')
+  end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  'NOH',
   function()
     vim.cmd('nohlsearch')
   end,
