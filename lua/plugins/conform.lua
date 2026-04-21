@@ -10,6 +10,8 @@ return {
         rust            = { 'rustfmt', lsp_format = 'fallback' },
         javascript      = { 'prettier', stop_after_first = true },
         javascriptreact = { 'prettier', stop_after_first = true },
+        json            = { 'prettier', stop_after_first = true },
+        jsonc           = { 'prettier', stop_after_first = true },
         typescript      = { 'prettier', stop_after_first = true },
         typescriptreact = { 'prettier', stop_after_first = true },
         vue             = { 'prettier', stop_after_first = true },

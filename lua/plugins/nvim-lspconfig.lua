@@ -75,7 +75,7 @@ return {
     vim.lsp.config('ts_ls', {
       on_attach = on_attach,
       capabilities = capabilities,
-      filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+      filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
       init_options = {
         plugins = {
           {
