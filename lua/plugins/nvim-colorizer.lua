@@ -1,7 +1,7 @@
 return {
-  'norcalli/nvim-colorizer.lua',
+  'NvChad/nvim-colorizer.lua',
   cond = not vim.g.vscode,
-  config = function ()
+  config = function()
     require('colorizer').setup()
   end
 }
