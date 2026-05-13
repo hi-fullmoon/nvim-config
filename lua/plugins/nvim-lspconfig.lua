@@ -61,19 +61,10 @@ return {
       end,
     })
 
-    local on_attach = function(client, bufnr)
-      local ok, illuminate = pcall(require, 'illuminate')
-      if not ok then
-        return
-      end
-      illuminate.on_attach(client)
-    end
-
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     local home = os.getenv('HOME')
 
     vim.lsp.config('ts_ls', {
-      on_attach = on_attach,
       capabilities = capabilities,
       filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
       init_options = {
@@ -88,7 +79,6 @@ return {
     })
 
     vim.lsp.config('vue_ls', {
-      on_attach = on_attach,
       capabilities = capabilities,
       filetypes = { 'vue' }
     })
@@ -96,22 +86,18 @@ return {
     vim.lsp.config('angularls', {})
 
     vim.lsp.config('html_ls', {
-      on_attach = on_attach,
       capabilities = capabilities,
     })
 
     vim.lsp.config('cssls', {
-      on_attach = on_attach,
       capabilities = capabilities,
     })
 
     vim.lsp.config('tailwindcss', {
-      on_attach = on_attach,
       capabilities = capabilities,
     })
 
     vim.lsp.config('lua_ls', {
-      on_attach = on_attach,
       capabilities = capabilities,
       settings = {
         Lua = {
@@ -128,22 +114,18 @@ return {
     })
 
     vim.lsp.config('vimls', {
-      on_attach = on_attach,
       capabilities = capabilities,
     })
 
     vim.lsp.config('bashls', {
-      on_attach = on_attach,
       capabilities = capabilities,
     })
 
     vim.lsp.config('gopls', {
-      on_attach = on_attach,
       capabilities = capabilities,
     })
 
     vim.lsp.config('eslint', {
-      on_attach = on_attach,
       capabilities = capabilities,
       settings = {
         autoFixOnFormat = true,
@@ -151,7 +133,6 @@ return {
     })
 
     vim.lsp.config('stylelint_lsp', {
-      on_attach = on_attach,
       capabilities = capabilities,
       filetypes = { 'css', 'less', 'scss' },
       settings = {

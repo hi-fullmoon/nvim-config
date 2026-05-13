@@ -7,7 +7,7 @@ return {
   config = function()
     require('mason').setup()
     require("mason-lspconfig").setup({
-      ensure_installed = { 'lua_ls', 'ts_ls', 'eslint', 'gopls', 'rust_analyzer', 'volar' },
+      ensure_installed = { 'lua_ls', 'ts_ls', 'eslint', 'gopls', 'rust_analyzer', 'vue_ls' },
     })
   end
 }
