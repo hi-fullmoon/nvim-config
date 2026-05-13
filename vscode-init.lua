@@ -24,8 +24,8 @@ vim.o.clipboard = 'unnamedplus'
 ------------------------------------------------------------------------------------------
 -- 根据操作系统设置不同的输入法切换命令
 if vim.fn.has('mac') == 1 then
-  -- 检查是否为 Apple Silicon
-  local is_apple_silicon = vim.fn.system('uname -m'):find('arm64') ~= nil
+  -- 检测是否为 Apple Silicon
+  local is_apple_silicon = vim.loop.os_uname().machine == 'arm64'
   local macism_path = is_apple_silicon
       and '/opt/homebrew/bin/macism' -- Apple Silicon 路径
       or '/usr/local/bin/macism'     -- Intel Mac 路径
@@ -61,13 +61,13 @@ vim.keymap.set('n', 'Q', function() vscode.call('workbench.action.closeActiveEdi
 vim.keymap.set('n', 'gt', function() vscode.call('editor.action.goToTypeDefinition') end)
 vim.keymap.set('n', 'gr', function() vscode.call('editor.action.goToReferences') end)
 
-vim.keymap.set('n', '<leader>be', function() vscode.call('workbench.action.showAllEditors') end)
 vim.keymap.set('n', '<leader>1', function() vscode.call('workbench.action.openEditorAtIndex1') end)
 vim.keymap.set('n', '<leader>2', function() vscode.call('workbench.action.openEditorAtIndex2') end)
 vim.keymap.set('n', '<leader>3', function() vscode.call('workbench.action.openEditorAtIndex3') end)
 vim.keymap.set('n', '<leader>4', function() vscode.call('workbench.action.openEditorAtIndex4') end)
 vim.keymap.set('n', '<leader>5', function() vscode.call('workbench.action.openEditorAtIndex5') end)
 vim.keymap.set('n', '<leader>6', function() vscode.call('workbench.action.openEditorAtIndex6') end)
+vim.keymap.set('n', '<leader>be', function() vscode.call('workbench.action.showAllEditors') end)
 vim.keymap.set('n', '<leader>co', function() vscode.call('workbench.action.closeOtherEditors') end)
 
 vim.keymap.set('n', '<leader>rn', function() vscode.call('editor.action.rename') end)
@@ -86,44 +86,17 @@ vim.keymap.set({ 'n', 'x' }, '<leader>ar', function()
   vscode.action('editor.action.refactor')
 end)
 
-vim.keymap.set({ "n", "x", "i" }, "<C-d>", function()
-  vscode.with_insert(function()
-    vscode.action("editor.action.addSelectionToNextFindMatch")
-  end)
-end)
+vim.api.nvim_create_user_command( 'RE', function() vscode.call('vscode-neovim.restart') end, {})
+vim.api.nvim_create_user_command( 'Re', function() vscode.call('vscode-neovim.restart') end, {})
 
-vim.api.nvim_create_user_command(
-  'RE',
-  function()
-    vscode.call('vscode-neovim.restart')
-  end,
-  {}
-)
-
-vim.api.nvim_create_user_command(
-  'Noh',
-  function()
-    vim.cmd('nohlsearch')
-  end,
-  {}
-)
-
-vim.api.nvim_create_user_command(
-  'NOH',
-  function()
-    vim.cmd('nohlsearch')
-  end,
-  {}
-)
-
-
--- 加载 neovim 插件
-------------------------------------------------------------------------------------------
+vim.api.nvim_create_user_command( 'Noh', function() vim.cmd('nohlsearch') end, {})
+vim.api.nvim_create_user_command( 'NOH', function() vim.cmd('nohlsearch') end, {})
 
 require("lazy").setup({
   spec = {
     { import = "plugins" },
   },
-  install = { colorscheme = { "habamax" } },
-  checker = { enabled = true },
+  checker = { enabled = false },
 })
+
+

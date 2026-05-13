@@ -3,5 +3,11 @@ return {
   cond = not vim.g.vscode,
   config = function ()
     require('which-key').setup()
+    require('which-key').add({
+      { '<leader>b', group = 'Buffer' },
+      { '<leader>f', group = 'Find' },
+      { '<leader>h', group = 'Git Hunk' },
+      { '<leader>c', group = 'Close/Code' },
+    })
   end
 }

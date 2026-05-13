@@ -23,7 +23,7 @@ return {
             highlight = 'Directory'
           }
         },
-        diagnostics = "coc",
+        diagnostics = "nvim_lsp",
         diagnostics_update_in_insert = false,
         show_close_icon = false,
         sort_by = 'insert_after_current'

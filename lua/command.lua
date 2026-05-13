@@ -1,7 +1,7 @@
 -- 检测操作系统和芯片架构
 if vim.fn.has('mac') == 1 then
   -- 检测是否为 Apple Silicon
-  local is_apple_silicon = vim.fn.system('uname -m'):find('arm64') ~= nil
+  local is_apple_silicon = vim.loop.os_uname().machine == 'arm64'
   local macism_path = is_apple_silicon
       and '/opt/homebrew/bin/macism' -- Apple Silicon 路径
       or '/usr/local/bin/macism'   -- Intel 路径

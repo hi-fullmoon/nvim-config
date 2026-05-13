@@ -4,7 +4,6 @@ vim.scriptencoding = 'utf-8'
 
 vim.o.cursorline = true
 vim.o.autoindent = true
-vim.o.filetype = 'plugin'
 vim.o.hlsearch = true
 vim.o.showmatch = false
 vim.o.wildmenu = true
