@@ -1,9 +1,28 @@
 return {
-  "oskarnurm/koda.nvim",
-  lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-  priority = 1000, -- make sure to load this before all the other start plugins
+  "folke/tokyonight.nvim",
+  lazy = false,
+  priority = 1000,
   config = function()
-    -- require("koda").setup({ transparent = true })
-    vim.cmd("colorscheme koda-dark")
+    require("tokyonight").setup({
+      style = "night",
+      transparent = false,
+      terminal_colors = true,
+      styles = {
+        comments = { italic = true },
+        keywords = { italic = true },
+        functions = {},
+        variables = {},
+        sidebars = "dark",
+        floats = "dark",
+      },
+      sidebars = { "qf", "help", "terminal", "packer" },
+      day_brightness = 0.3,
+      hide_inactive_statusline = false,
+      dim_inactive = false,
+      lualine_bold = false,
+      on_colors = function(colors) end,
+      on_highlights = function(highlights, colors) end,
+    })
+    vim.cmd("colorscheme tokyonight")
   end,
 }
