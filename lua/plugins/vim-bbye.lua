@@ -1,7 +1,6 @@
 return {
-  'moll/vim-bbye',
+  "moll/vim-bbye",
   cond = not vim.g.vscode,
-  config = function()
-    vim.keymap.set('n', '<leader>q', ':Bdelete<CR>', {})
-  end
+  cmd = { "Bdelete", "Bwipeout" },
+  keys = { { "<leader>q", "<cmd>Bdelete<cr>", desc = "关闭缓冲区" } },
 }

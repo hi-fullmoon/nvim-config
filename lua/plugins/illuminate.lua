@@ -1,11 +1,12 @@
 return {
-  'RRethy/vim-illuminate',
+  "RRethy/vim-illuminate",
   cond = not vim.g.vscode,
+  ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
   config = function()
-    require('illuminate').configure({
+    require("illuminate").configure({
       -- providers: provider used to get references in the buffer, ordered by priority
       providers = {
-        'lsp',
+        "lsp",
       },
       -- delay: delay in milliseconds
       delay = 120,
@@ -16,10 +17,10 @@ return {
       -- filetypes_denylist: filetypes to not illuminate, this overrides filetypes_allowlist
       filetypes_denylist = {},
       -- filetypes_allowlist: filetypes to illuminate, this is overriden by filetypes_denylist
-      filetypes_allowlist = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+      filetypes_allowlist = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
       -- modes_denylist: modes to not illuminate, this overrides modes_allowlist
       -- See `:help mode()` for possible values
-      modes_denylist = { 'i' },
+      modes_denylist = { "i" },
       -- modes_allowlist: modes to illuminate, this is overriden by modes_denylist
       -- See `:help mode()` for possible values
       modes_allowlist = {},
@@ -43,5 +44,5 @@ return {
       -- min_count_to_highlight: minimum number of matches required to perform highlighting
       min_count_to_highlight = 1,
     })
-  end
+  end,
 }

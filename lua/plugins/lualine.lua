@@ -1,22 +1,23 @@
 return {
-  'nvim-lualine/lualine.nvim',
+  "nvim-lualine/lualine.nvim",
   cond = not vim.g.vscode,
-  config = function ()
-    require('lualine').setup({
+  event = "VeryLazy",
+  config = function()
+    require("lualine").setup({
       options = {
-        theme = 'tokyonight',
-        section_separators = '',
-        component_separators = ''
+        theme = "tokyonight",
+        section_separators = "",
+        component_separators = "",
       },
       sections = {
         lualine_c = {
           {
-            'filename',
+            "filename",
             path = 1,
-            shorting_target = 40
-          }
+            shorting_target = 40,
+          },
         },
       },
     })
-  end
+  end,
 }

@@ -1,49 +1,51 @@
-vim.g.mapleader = ' '
+local opt = vim.opt
 
-vim.scriptencoding = 'utf-8'
+opt.cursorline = true
+opt.autoindent = true
+opt.hlsearch = true
+opt.showmatch = false
+opt.wildmenu = true
+opt.showcmd = true
+opt.termguicolors = true
 
-vim.o.cursorline = true
-vim.o.autoindent = true
-vim.o.hlsearch = true
-vim.o.showmatch = false
-vim.o.wildmenu = true
-vim.o.showcmd = true
-vim.o.hidden = true
-vim.o.termguicolors = true
-vim.o.syntax = 'on'
+opt.number = true
+opt.relativenumber = false
 
-vim.o.number = true
-vim.o.relativenumber = false
+opt.scrolloff = 6
+opt.sidescrolloff = 6
 
-vim.o.scrolloff = 6
-vim.o.sidescrolloff = 6
+opt.mouse = "a"
+opt.clipboard = "unnamedplus"
 
-vim.o.mouse = 'a'
-vim.o.clipboard = 'unnamedplus'
+opt.backup = false
+opt.swapfile = false
+opt.undofile = true
 
-vim.o.backup = false
-vim.o.swapfile = false
+opt.ignorecase = true
+opt.smartcase = true
 
-vim.o.ignorecase = true
-vim.o.smartcase = true
+opt.wrap = false
+opt.splitbelow = true
+opt.splitright = true
 
-vim.o.wrap = false
+opt.expandtab = true
+opt.tabstop = 2
+opt.softtabstop = 2
+opt.shiftwidth = 2
 
-vim.o.expandtab = true
-vim.o.tabstop = 2
-vim.o.softtabstop = 2
-vim.o.shiftwidth = 2
+opt.completeopt = { "menuone", "noinsert", "noselect" }
+opt.shortmess:append("c")
 
-vim.o.completeopt = 'menuone,noinsert,noselect'
-vim.o.shortmess = vim.o.shortmess .. 'c'
+opt.fillchars:append({ vert = " " })
+opt.synmaxcol = 400
+opt.signcolumn = "yes"
+opt.updatetime = 250
+opt.timeoutlen = 400
 
-vim.opt.fillchars = {
-  vert = ' ',
-}
-vim.o.synmaxcol = 400
-vim.o.signcolumn = 'yes'
+-- 没有 Treesitter parser 时仍保留 Vim 自带的语法高亮。
+vim.cmd("syntax enable")
 
-vim.o.foldenable = true
-vim.o.foldlevel = 100
-vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+-- Treesitter 会在支持当前文件类型时按窗口启用折叠表达式。
+opt.foldenable = true
+opt.foldlevel = 99
+opt.foldlevelstart = 99

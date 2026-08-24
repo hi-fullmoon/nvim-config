@@ -1,46 +1,44 @@
 return {
-  'akinsho/bufferline.nvim',
+  "akinsho/bufferline.nvim",
   cond = not vim.g.vscode,
-  priority = 49,
+  event = "VeryLazy",
   dependencies = {
-    'nvim-tree/nvim-web-devicons',
+    "nvim-tree/nvim-web-devicons",
   },
-  config = function ()
-    local bufferline = require('bufferline');
+  config = function()
+    local bufferline = require("bufferline")
     bufferline.setup({
       options = {
-        mode = 'buffers',
-        numbers = 'none',
-        separator_style = 'thin',
+        mode = "buffers",
+        numbers = "none",
+        separator_style = "thin",
         style_preset = {
           bufferline.style_preset.no_italic,
-          bufferline.style_preset.no_bold
+          bufferline.style_preset.no_bold,
         },
         offsets = {
           {
-            filetype = 'NvimTree',
-            text = 'File Explorer',
-            highlight = 'Directory'
-          }
+            filetype = "NvimTree",
+            text = "File Explorer",
+            highlight = "Directory",
+          },
         },
         diagnostics = "nvim_lsp",
         diagnostics_update_in_insert = false,
         show_close_icon = false,
-        sort_by = 'insert_after_current'
+        sort_by = "insert_after_current",
       },
     })
 
-    local opts = { noremap = true, silent = true }
+    for index = 1, 6 do
+      vim.keymap.set("n", "<leader>" .. index, "<cmd>BufferLineGoToBuffer " .. index .. "<cr>", {
+        silent = true,
+        desc = "切换到缓冲区 " .. index,
+      })
+    end
 
-    vim.api.nvim_set_keymap('n', '<leader>1', ':BufferLineGoToBuffer 1<CR>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>2', ':BufferLineGoToBuffer 2<CR>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>3', ':BufferLineGoToBuffer 3<CR>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>4', ':BufferLineGoToBuffer 4<CR>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>5', ':BufferLineGoToBuffer 5<CR>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>6', ':BufferLineGoToBuffer 6<CR>', opts)
-
-    vim.api.nvim_set_keymap('n', '<leader>cl', ':BufferLineCloseLeft<CR>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>cr', ':BufferLineCloseRight<CR>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>co', ':BufferLineCloseOthers<CR>', opts)
-  end
+    vim.keymap.set("n", "<leader>cl", "<cmd>BufferLineCloseLeft<cr>", { desc = "关闭左侧缓冲区" })
+    vim.keymap.set("n", "<leader>cr", "<cmd>BufferLineCloseRight<cr>", { desc = "关闭右侧缓冲区" })
+    vim.keymap.set("n", "<leader>co", "<cmd>BufferLineCloseOthers<cr>", { desc = "关闭其他缓冲区" })
+  end,
 }

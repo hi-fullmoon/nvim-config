@@ -1,10 +1,21 @@
 return {
-  'akinsho/toggleterm.nvim',
+  "akinsho/toggleterm.nvim",
   cond = not vim.g.vscode,
+  cmd = { "ToggleTerm", "TermExec" },
+  keys = { { "<C-\\>", "<cmd>ToggleTerm<cr>", desc = "切换浮动终端" } },
   config = function()
-    require('toggleterm').setup({
+    local function set_terminal_keymaps(term)
+      local opts = { buffer = term.bufnr, silent = true }
+      vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], opts)
+      vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+      vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
+      vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
+      vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
+      vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
+    end
+
+    require("toggleterm").setup({
       size = 12,
-      open_mapping = [[<C-\>]],
       hide_numbers = true,
       shade_filetypes = {},
       shade_terminals = true,
@@ -12,27 +23,18 @@ return {
       start_in_insert = true,
       insert_mappings = true,
       persist_size = true,
-      direction = 'float',
+      direction = "float",
       close_on_exit = true,
       shell = vim.o.shell,
+      on_open = set_terminal_keymaps,
       float_opts = {
-        border = 'curved',
+        border = "curved",
         winblend = 0,
         highlights = {
-          border = 'Normal',
-          background = 'Normal',
+          border = "Normal",
+          background = "Normal",
         },
       },
     })
-
-    function _G.set_terminal_keymaps()
-      local opts = { noremap = true }
-      vim.api.nvim_buf_set_keymap(0, 't', '<Esc>', [[<C-\><C-n>]], opts)
-      vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
-      vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
-      vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
-      vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
-      vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
-    end
-  end
+  end,
 }

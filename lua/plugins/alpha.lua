@@ -1,7 +1,8 @@
 return {
-  'goolord/alpha-nvim',
+  "goolord/alpha-nvim",
   cond = not vim.g.vscode,
+  event = "VimEnter",
   config = function()
-    require('alpha').setup(require('alpha.themes.startify').config)
-  end
+    require("alpha").setup(require("alpha.themes.startify").config)
+  end,
 }

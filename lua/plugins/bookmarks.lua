@@ -1,7 +1,8 @@
 return {
-  'MattesGroeger/vim-bookmarks',
+  "MattesGroeger/vim-bookmarks",
   cond = not vim.g.vscode,
-  config = function()
-    vim.g.bookmark_sign = '♥'
-  end
+  event = { "BufReadPost", "BufNewFile" },
+  init = function()
+    vim.g.bookmark_sign = "♥"
+  end,
 }

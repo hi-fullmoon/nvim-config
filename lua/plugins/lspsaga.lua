@@ -1,19 +1,20 @@
 return {
-  'nvimdev/lspsaga.nvim',
+  "nvimdev/lspsaga.nvim",
   cond = not vim.g.vscode,
+  cmd = "Lspsaga",
   config = function()
-    local lspsaga = require('lspsaga')
+    local lspsaga = require("lspsaga")
 
     lspsaga.setup({
       ui = {
         title = false,
         incoming = "",
         outgoing = "",
-        hover = '',
+        hover = "",
       },
       scroll_preview = {
-        scroll_up = '<C-u>',
-        scroll_down = '<C-d>',
+        scroll_up = "<C-u>",
+        scroll_down = "<C-d>",
       },
       lightbulb = {
         enable = false,
@@ -25,8 +26,8 @@ return {
         in_select = false,
       },
       implement = {
-        enable = false
-      }
+        enable = false,
+      },
     })
-  end
+  end,
 }

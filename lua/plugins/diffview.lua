@@ -1,7 +1,6 @@
 return {
-  'sindrets/diffview.nvim',
+  "sindrets/diffview.nvim",
   cond = not vim.g.vscode,
-  config = function ()
-    require('diffview').setup({})
-  end
+  cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory", "DiffviewFocusFiles", "DiffviewToggleFiles" },
+  opts = {},
 }

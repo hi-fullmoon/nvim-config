@@ -1,13 +1,29 @@
 return {
-  'windwp/nvim-spectre',
+  "windwp/nvim-spectre",
   cond = not vim.g.vscode,
-  config = function()
-    require('spectre').setup()
-
-    vim.cmd([[
-      nnoremap <leader>S :lua require('spectre').open()<CR>
-      nnoremap <leader>sp viw:lua require('spectre').open_file_search()<CR>
-      nnoremap <leader>sw :lua require('spectre').open_visual({ select_word = true })<CR>
-    ]])
-  end
+  cmd = "Spectre",
+  keys = {
+    {
+      "<leader>S",
+      function()
+        require("spectre").open()
+      end,
+      desc = "全局搜索替换",
+    },
+    {
+      "<leader>sp",
+      function()
+        require("spectre").open_file_search()
+      end,
+      desc = "在当前文件搜索替换",
+    },
+    {
+      "<leader>sw",
+      function()
+        require("spectre").open_visual({ select_word = true })
+      end,
+      desc = "搜索当前单词",
+    },
+  },
+  opts = {},
 }

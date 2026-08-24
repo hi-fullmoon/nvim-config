@@ -1,46 +1,45 @@
 return {
-  'hrsh7th/nvim-cmp',
+  "hrsh7th/nvim-cmp",
   cond = not vim.g.vscode,
+  event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-cmdline',
-    'saadparwaiz1/cmp_luasnip',
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
+    "saadparwaiz1/cmp_luasnip",
+    "L3MON4D3/LuaSnip",
+    "rafamadriz/friendly-snippets",
   },
   config = function()
-    local cmp = require('cmp')
+    local cmp = require("cmp")
 
-    require('luasnip/loaders/from_vscode').lazy_load()
+    require("luasnip/loaders/from_vscode").lazy_load()
 
     cmp.setup({
       snippet = {
         expand = function(args)
-          require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-          -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-          -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-          -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-          -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+          require("luasnip").lsp_expand(args.body)
         end,
       },
-      mapping = {
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c' }),
-        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-        ['<C-y>'] = cmp.config.disable,
-        ['<C-e>'] = cmp.mapping {
+      mapping = cmp.mapping.preset.insert({
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-b>"] = cmp.mapping.scroll_docs(-1),
+        ["<C-f>"] = cmp.mapping.scroll_docs(1),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-y>"] = cmp.config.disable,
+        ["<C-e>"] = cmp.mapping({
           i = cmp.mapping.abort(),
           c = cmp.mapping.close(),
-        },
-        ['<CR>'] = cmp.mapping.confirm { select = true },
-      },
+        }),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+      }),
       sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'buffer' },
-        { name = 'path' },
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "path" },
       },
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
@@ -52,19 +51,19 @@ return {
       },
     })
 
-    cmp.setup.cmdline('/', {
+    cmp.setup.cmdline({ "/", "?" }, {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
-        { name = 'buffer' }
-      }
+        { name = "buffer" },
+      },
     })
 
-    cmp.setup.cmdline(':', {
+    cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources(
-        { { name = 'path' } },
-        { { name = 'cmdline' } }
-      )
+        { { name = "path" } },
+        { { name = "cmdline" } }
+      ),
     })
-  end
+  end,
 }

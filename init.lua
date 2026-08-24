@@ -1,3 +1,7 @@
+vim.g.mapleader = " "
+
+vim.g.maplocalleader = " "
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -15,14 +19,17 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('base')
-require('keybindings')
-require('command')
+require("base")
+require("keybindings")
+require("command")
 
 require("lazy").setup({
   spec = {
     { import = "plugins" },
   },
   install = { colorscheme = { "tokyonight" } },
-  checker = { enabled = true },
+  checker = {
+    enabled = true,
+    notify = false,
+  },
 })

@@ -1,4 +1,5 @@
 return {
-  'jlanzarotta/bufexplorer',
+  "jlanzarotta/bufexplorer",
   cond = not vim.g.vscode,
+  cmd = { "BufExplorer", "ToggleBufExplorer", "OpenBufExplorer" },
 }

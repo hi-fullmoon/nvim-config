@@ -1,8 +1,7 @@
 return {
-  'folke/todo-comments.nvim',
+  "folke/todo-comments.nvim",
   cond = not vim.g.vscode,
-  config = function ()
-    require('todo-comments').setup({})
-  end
+  event = { "BufReadPost", "BufNewFile" },
+  dependencies = { "nvim-lua/plenary.nvim" },
+  opts = {},
 }
-

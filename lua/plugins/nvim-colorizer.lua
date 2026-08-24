@@ -1,7 +1,6 @@
 return {
-  'NvChad/nvim-colorizer.lua',
+  "NvChad/nvim-colorizer.lua",
   cond = not vim.g.vscode,
-  config = function()
-    require('colorizer').setup()
-  end
+  event = { "BufReadPost", "BufNewFile" },
+  opts = {},
 }

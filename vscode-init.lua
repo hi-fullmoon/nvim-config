@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -15,82 +18,67 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- 基础配置
-------------------------------------------------------------------------------------------
-vim.g.mapleader = ' '
-vim.o.clipboard = 'unnamedplus'
-
--- 一些命令
-------------------------------------------------------------------------------------------
--- 根据操作系统设置不同的输入法切换命令
-if vim.fn.has('mac') == 1 then
-  -- 检测是否为 Apple Silicon
-  local is_apple_silicon = vim.loop.os_uname().machine == 'arm64'
-  local macism_path = is_apple_silicon
-      and '/opt/homebrew/bin/macism' -- Apple Silicon 路径
-      or '/usr/local/bin/macism'     -- Intel Mac 路径
-
-  vim.cmd(string.format([[
-    autocmd InsertLeave * :silent !%s com.apple.keylayout.ABC
-  ]], macism_path))
-elseif vim.fn.has('win32') == 1 then
-  vim.cmd [[
-    autocmd InsertLeave * :silent !im-select 1033
-  ]]
-end
-
-vim.cmd [[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-  augroup end
-]]
+vim.opt.clipboard = "unnamedplus"
+require("command")
 
 -- vscode 按键映射
-------------------------------------------------------------------------------------------
-local vscode = require('vscode')
+local vscode = require("vscode")
 
-vim.keymap.set('n', 'j', function() vscode.call('cursorDown') end)
-vim.keymap.set('n', 'k', function() vscode.call('cursorUp') end)
-vim.keymap.set('n', 'l', function() vscode.call('cursorRight') end)
-vim.keymap.set('n', 'h', function() vscode.call('cursorLeft') end)
-vim.keymap.set('n', 'tt', function() vscode.call('workbench.explorer.fileView.focus') end)
-vim.keymap.set('n', 'K', function() vscode.action('editor.action.showHover') end)
-vim.keymap.set('n', 'W', function() vscode.call('workbench.action.files.saveAll') end)
-vim.keymap.set('n', 'Q', function() vscode.call('workbench.action.closeActiveEditor') end)
-vim.keymap.set('n', 'gt', function() vscode.call('editor.action.goToTypeDefinition') end)
-vim.keymap.set('n', 'gr', function() vscode.call('editor.action.goToReferences') end)
+local function call(command)
+  return function()
+    vscode.call(command)
+  end
+end
 
-vim.keymap.set('n', '<leader>1', function() vscode.call('workbench.action.openEditorAtIndex1') end)
-vim.keymap.set('n', '<leader>2', function() vscode.call('workbench.action.openEditorAtIndex2') end)
-vim.keymap.set('n', '<leader>3', function() vscode.call('workbench.action.openEditorAtIndex3') end)
-vim.keymap.set('n', '<leader>4', function() vscode.call('workbench.action.openEditorAtIndex4') end)
-vim.keymap.set('n', '<leader>5', function() vscode.call('workbench.action.openEditorAtIndex5') end)
-vim.keymap.set('n', '<leader>6', function() vscode.call('workbench.action.openEditorAtIndex6') end)
-vim.keymap.set('n', '<leader>be', function() vscode.call('workbench.action.showAllEditors') end)
-vim.keymap.set('n', '<leader>co', function() vscode.call('workbench.action.closeOtherEditors') end)
+local function action(command)
+  return function()
+    vscode.action(command)
+  end
+end
 
-vim.keymap.set('n', '<leader>rn', function() vscode.call('editor.action.rename') end)
-vim.keymap.set('n', '<leader>ca', function() vscode.call('editor.action.quickFix') end)
-vim.keymap.set('n', '<leader>q', function() vscode.call('workbench.action.closeActiveEditor') end)
-vim.keymap.set('n', '<leader>ff', function() vscode.call('workbench.action.quickOpen') end)
-vim.keymap.set('n', '<leader>fg', function() vscode.call('workbench.action.findInFiles') end)
-vim.keymap.set('n', '<leader>sp', function() vscode.call('workbench.action.replaceInFiles') end)
-vim.keymap.set('n', '<leader>or', function() vscode.call('workbench.action.openRecent') end)
-vim.keymap.set('n', '<leader>[', function() vscode.call('editor.action.marker.prev') end)
-vim.keymap.set('n', '<leader>]', function() vscode.call('editor.action.marker.next') end)
-vim.keymap.set('n', '[c', function() vscode.call('editor.action.dirtydiff.previous') end)
-vim.keymap.set('n', ']c', function() vscode.call('editor.action.dirtydiff.next') end)
+local function map(mode, lhs, rhs, desc)
+  vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
+end
 
-vim.keymap.set({ 'n', 'x' }, '<leader>ar', function()
-  vscode.action('editor.action.refactor')
-end)
+map("n", "j", call("cursorDown"), "下移光标")
+map("n", "k", call("cursorUp"), "上移光标")
+map("n", "l", call("cursorRight"), "右移光标")
+map("n", "h", call("cursorLeft"), "左移光标")
+map("n", "tt", call("workbench.explorer.fileView.focus"), "聚焦文件资源管理器")
+map("n", "K", action("editor.action.showHover"), "显示悬浮信息")
+map("n", "W", call("workbench.action.files.saveAll"), "保存所有文件")
+map("n", "Q", call("workbench.action.closeActiveEditor"), "关闭编辑器")
+map("n", "gt", call("editor.action.goToTypeDefinition"), "跳转到类型定义")
+map("n", "gr", call("editor.action.goToReferences"), "查找引用")
 
-vim.api.nvim_create_user_command( 'RE', function() vscode.call('vscode-neovim.restart') end, {})
-vim.api.nvim_create_user_command( 'Re', function() vscode.call('vscode-neovim.restart') end, {})
+for index = 1, 6 do
+  map("n", "<leader>" .. index, call("workbench.action.openEditorAtIndex" .. index), "切换到编辑器 " .. index)
+end
 
-vim.api.nvim_create_user_command( 'Noh', function() vim.cmd('nohlsearch') end, {})
-vim.api.nvim_create_user_command( 'NOH', function() vim.cmd('nohlsearch') end, {})
+map("n", "<leader>be", call("workbench.action.showAllEditors"), "显示所有编辑器")
+map("n", "<leader>co", call("workbench.action.closeOtherEditors"), "关闭其他编辑器")
+map("n", "<leader>rn", call("editor.action.rename"), "重命名符号")
+map("n", "<leader>ca", call("editor.action.quickFix"), "快速修复")
+map("n", "<leader>q", call("workbench.action.closeActiveEditor"), "关闭编辑器")
+map("n", "<leader>ff", call("workbench.action.quickOpen"), "快速打开")
+map("n", "<leader>fg", call("workbench.action.findInFiles"), "在文件中查找")
+map("n", "<leader>sp", call("workbench.action.replaceInFiles"), "在文件中替换")
+map("n", "<leader>or", call("workbench.action.openRecent"), "打开最近项目")
+map("n", "<leader>[", call("editor.action.marker.prev"), "上一个诊断")
+map("n", "<leader>]", call("editor.action.marker.next"), "下一个诊断")
+map("n", "[c", call("editor.action.dirtydiff.previous"), "上一个 Git 变更")
+map("n", "]c", call("editor.action.dirtydiff.next"), "下一个 Git 变更")
+map({ "n", "x" }, "<leader>ar", action("editor.action.refactor"), "重构")
+
+for _, name in ipairs({ "RE", "Re" }) do
+  vim.api.nvim_create_user_command(name, call("vscode-neovim.restart"), {})
+end
+
+for _, name in ipairs({ "Noh", "NOH" }) do
+  vim.api.nvim_create_user_command(name, function()
+    vim.cmd("nohlsearch")
+  end, {})
+end
 
 require("lazy").setup({
   spec = {
@@ -98,5 +86,3 @@ require("lazy").setup({
   },
   checker = { enabled = false },
 })
-
-

@@ -7,8 +7,8 @@ return {
       'nvim-tree/nvim-web-devicons'
     },
     keys = {
-      { 'tt', '<cmd>NvimTreeToggle<cr>', desc = 'NvimTree' },
-      { '<leader>t', '<cmd>NvimTreeFocus<cr>', desc = 'NvimTree' },
+      { "tt", "<cmd>NvimTreeToggle<cr>", desc = "切换文件树" },
+      { "<leader>t", "<cmd>NvimTreeFocus<cr>", desc = "聚焦文件树" },
     },
     config = function()
       require('nvim-tree').setup {
@@ -45,4 +45,3 @@ return {
     end
   }
 }
-

@@ -1,62 +1,74 @@
 return {
-  'lewis6991/gitsigns.nvim',
+  "lewis6991/gitsigns.nvim",
   cond = not vim.g.vscode,
-  config = function ()
-    local gitsigns = require('gitsigns')
+  event = { "BufReadPre", "BufNewFile" },
+  config = function()
+    local gitsigns = require("gitsigns")
 
     gitsigns.setup({
-      signs                        = {
-        add          = { text = '│' },
-        change       = { text = '│' },
-        delete       = { text = '_' },
-        topdelete    = { text = '‾' },
-        changedelete = { text = '~' },
+      signs = {
+        add = { text = "│" },
+        change = { text = "│" },
+        delete = { text = "_" },
+        topdelete = { text = "‾" },
+        changedelete = { text = "~" },
       },
-      signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
-      numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
-      linehl                       = false, -- Toggle with `:Gitsigns togle_linehl`
-      word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
-      watch_gitdir                 = {
+      signcolumn = true,
+      numhl = false,
+      linehl = false,
+      word_diff = false,
+      watch_gitdir = {
         interval = 1000,
-        follow_files = true
+        follow_files = true,
       },
-      attach_to_untracked          = true,
-      current_line_blame           = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-      current_line_blame_opts      = {
+      attach_to_untracked = true,
+      current_line_blame = true,
+      current_line_blame_opts = {
         virt_text = true,
-        virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+        virt_text_pos = "eol",
         delay = 200,
         ignore_whitespace = false,
       },
-      current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-      sign_priority                = 6,
-      update_debounce              = 100,
-      status_formatter             = nil, -- Use default
-      max_file_length              = 40000,
-      preview_config               = {
-        -- Options passed to nvim_open_win
-        border = 'single',
-        style = 'minimal',
-        relative = 'cursor',
+      current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+      sign_priority = 6,
+      update_debounce = 100,
+      max_file_length = 40000,
+      preview_config = {
+        border = "single",
+        style = "minimal",
+        relative = "cursor",
         row = 0,
-        col = 1
+        col = 1,
       },
-      on_attach                    = function(bufnr)
-        local function map(mode, lhs, rhs, opts)
-          opts = vim.tbl_extend('force', { noremap = true, silent = true }, opts or {})
-          vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+      on_attach = function(bufnr)
+        local function map(mode, lhs, rhs, desc)
+          vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, desc = desc })
         end
 
-        -- Navigation
-        map('n', ']c', "&diff ? ']c' : ':Gitsigns nav_hunk next<CR>'", { expr = true })
-        map('n', '[c', "&diff ? '[c' : ':Gitsigns nav_hunk prev<CR>'", { expr = true })
+        map("n", "]c", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "]c", bang = true })
+          else
+            gitsigns.nav_hunk("next")
+          end
+        end, "下一个 Git hunk")
+        map("n", "[c", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "[c", bang = true })
+          else
+            gitsigns.nav_hunk("prev")
+          end
+        end, "上一个 Git hunk")
 
-        -- Actions
-        map('n', '<leader>hp', ':Gitsigns preview_hunk<CR>')
-        map('n', '<leader>hb', ':lua require"gitsigns".blame_line{ full=true }<CR>')
-        map('n', '<leader>hd', ':Gitsigns diffthis<CR>')
-        map('n', '<leader>hD', ':lua require"gitsigns".diffthis("~")<CR>')
-      end
+        map("n", "<leader>hp", gitsigns.preview_hunk, "预览 Git hunk")
+        map("n", "<leader>hb", function()
+          gitsigns.blame_line({ full = true })
+        end, "显示完整 Git blame")
+        map("n", "<leader>hd", gitsigns.diffthis, "比较当前文件")
+        map("n", "<leader>hD", function()
+          gitsigns.diffthis("~")
+        end, "与上次提交比较")
+      end,
     })
-  end
+  end,
 }

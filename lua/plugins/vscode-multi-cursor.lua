@@ -1,6 +1,8 @@
 return {
-  'vscode-neovim/vscode-multi-cursor.nvim',
-  event = 'VeryLazy',
-  cond = vim.g.vscode,
+  "vscode-neovim/vscode-multi-cursor.nvim",
+  event = "VeryLazy",
+  cond = function()
+    return vim.g.vscode ~= nil
+  end,
   opts = {},
 }
