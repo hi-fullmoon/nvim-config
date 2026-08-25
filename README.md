@@ -17,6 +17,7 @@
 - `rg`（Telescope 全文搜索）
 - Nerd Font（正确显示图标）
 - 编译 Treesitter parser 所需的 C 编译器和 tree-sitter CLI
+- 按使用语言安装格式化器：`stylua`、`isort` / `black`、`prettier`、`rustfmt`
 
 ## 安装
 

@@ -1,3 +1,48 @@
+local servers = {
+  ts_ls = {
+    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+  },
+  vue_ls = {
+    filetypes = { "vue" },
+  },
+  angularls = {},
+  html = {},
+  cssls = {},
+  tailwindcss = {},
+  lua_ls = {
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { "vim" },
+        },
+        workspace = {
+          library = {
+            [vim.env.VIMRUNTIME] = true,
+            [vim.fn.stdpath("config") .. "/lua"] = true,
+          },
+          checkThirdParty = false,
+        },
+        telemetry = { enable = false },
+      },
+    },
+  },
+  vimls = {},
+  bashls = {},
+  gopls = {},
+  eslint = {
+    settings = {
+      workingDirectory = { mode = "auto" },
+    },
+  },
+  stylelint_lsp = {
+    filetypes = { "css", "less", "scss" },
+  },
+}
+
+local ensure_installed = vim.tbl_keys(servers)
+table.insert(ensure_installed, "rust_analyzer")
+table.sort(ensure_installed)
+
 return {
   "neovim/nvim-lspconfig",
   cond = not vim.g.vscode,
@@ -8,7 +53,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
       dependencies = { "williamboman/mason.nvim" },
       opts = {
-        ensure_installed = { "lua_ls", "ts_ls", "eslint", "gopls", "rust_analyzer", "vue_ls" },
+        ensure_installed = ensure_installed,
         -- rustaceanvim 会单独管理 rust-analyzer，避免启动两个客户端。
         automatic_enable = { exclude = { "rust_analyzer" } },
       },
@@ -31,6 +76,8 @@ return {
       float = { border = "rounded" },
     })
 
+    local stylelint_group = vim.api.nvim_create_augroup("UserStylelintFix", { clear = true })
+
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
       callback = function(ev)
@@ -50,59 +97,25 @@ return {
         map("<leader>]", "<cmd>Lspsaga diagnostic_jump_next<cr>", "下一个诊断")
         map("<leader>rn", "<cmd>Lspsaga rename<cr>", "重命名符号")
         map("<leader>ca", "<cmd>Lspsaga code_action<cr>", "代码操作")
+
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client and client.name == "stylelint_lsp" then
+          vim.api.nvim_clear_autocmds({ group = stylelint_group, buffer = ev.buf })
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            group = stylelint_group,
+            buffer = ev.buf,
+            callback = function()
+              pcall(vim.cmd, "LspStylelintFixAll")
+            end,
+            desc = "保存前应用 Stylelint 自动修复",
+          })
+        end
       end,
     })
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
     local vue_language_server_path = vim.fn.stdpath("data")
       .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
-
-    local servers = {
-      ts_ls = {
-        filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-      },
-      vue_ls = {
-        filetypes = { "vue" },
-      },
-      angularls = {},
-      html = {},
-      cssls = {},
-      tailwindcss = {},
-      lua_ls = {
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
-            workspace = {
-              library = {
-                [vim.env.VIMRUNTIME] = true,
-                [vim.fn.stdpath("config") .. "/lua"] = true,
-              },
-              checkThirdParty = false,
-            },
-            telemetry = { enable = false },
-          },
-        },
-      },
-      vimls = {},
-      bashls = {},
-      gopls = {},
-      eslint = {
-        settings = {
-          workingDirectory = { mode = "auto" },
-        },
-      },
-      stylelint_lsp = {
-        filetypes = { "css", "less", "scss" },
-        settings = {
-          stylelintplus = {
-            autoFixOnSave = true,
-            autoFixOnFormat = true,
-          },
-        },
-      },
-    }
 
     if (vim.uv or vim.loop).fs_stat(vue_language_server_path) then
       servers.ts_ls.init_options = {
