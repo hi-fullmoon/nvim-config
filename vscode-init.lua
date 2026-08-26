@@ -46,6 +46,8 @@ for index = 1, 6 do
 end
 
 map("n", "<leader>be", action("workbench.action.showAllEditors"), "显示所有编辑器")
+map("n", "[b", action("workbench.action.previousEditor"), "切换到上一个编辑器")
+map("n", "]b", action("workbench.action.nextEditor"), "切换到下一个编辑器")
 map("n", "<leader>co", action("workbench.action.closeOtherEditors"), "关闭其他编辑器")
 map("n", "<leader>rn", action("editor.action.rename"), "重命名符号")
 map("n", "<leader>ca", action("editor.action.quickFix"), "快速修复")
