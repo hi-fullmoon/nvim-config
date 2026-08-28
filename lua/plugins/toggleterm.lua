@@ -8,6 +8,7 @@ return {
       local opts = { buffer = term.bufnr, silent = true }
       vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], opts)
       vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+      vim.keymap.set("t", "<C-\\>", [[<C-\><C-n><cmd>ToggleTerm<cr>]], opts)
       vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
       vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
       vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
@@ -23,6 +24,7 @@ return {
       start_in_insert = true,
       insert_mappings = true,
       persist_size = true,
+      persist_mode = false,
       direction = "float",
       close_on_exit = true,
       shell = vim.o.shell,
